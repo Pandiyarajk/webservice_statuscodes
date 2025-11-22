@@ -5,11 +5,13 @@ A production-ready C# .NET 8 minimal API for HTTP status code testing, rate limi
 ## 📋 Features
 
 - **Status Code Testing**: Return any HTTP status code (100-599) with customizable responses
+- **Educational API Endpoints**: Generate realistic test data (users, products, orders) for training
 - **Rate Limiting**: IP-based rate limiting with automatic blocking
 - **Request Logging**: Async SQLite logging with WAL mode
 - **Large JSON Handling**: Automatic file rotation for large request bodies (>200KB)
 - **IP Blocking**: Auto-expire blocklist with JSON persistence
 - **Admin Endpoints**: Health checks, log viewing, and blocklist management
+- **Python Examples**: Comprehensive Python scripts for API integration training
 
 ## 🏗️ Project Structure
 
@@ -76,6 +78,35 @@ dotnet run
 ```
 
 ## 📡 API Endpoints
+
+### Educational Endpoints (New!)
+
+Generate realistic test data for API training and integration testing:
+
+```bash
+# Get 10 random users
+curl http://localhost:5000/api/users?count=10
+
+# Get random products
+curl http://localhost:5000/api/products?count=15
+
+# Get random orders
+curl http://localhost:5000/api/orders?count=5
+
+# Batch request - get multiple types at once
+curl "http://localhost:5000/api/batch?users=10&products=10&orders=5"
+```
+
+**Available Educational Endpoints:**
+- `/api/users` - Generate user data with names, emails, addresses
+- `/api/products` - Generate product catalog with prices, ratings
+- `/api/orders` - Generate orders with items and totals
+- `/api/random` - Get random data of any type
+- `/api/batch` - Get multiple data types in one request
+
+See [StatusService/README.md](StatusService/README.md) for detailed documentation.
+
+### Status Testing Endpoints
 
 ### 1. Status Testing Endpoint
 
@@ -484,6 +515,41 @@ taskkill /PID <PID> /F
 
 **Solution:** Ensure the application has write permissions to the `Data/` and `data/` directories.
 
+## 🐍 Python Integration Examples
+
+The `python_examples/` directory contains comprehensive Python scripts demonstrating API integration:
+
+```bash
+# Install dependencies
+pip install -r python_examples/requirements.txt
+
+# Run basic examples
+python python_examples/basic_request.py
+
+# Run integration tests
+python python_examples/integration_test.py
+```
+
+**Available Scripts:**
+- `basic_request.py` - Introduction to API requests
+- `error_handling.py` - Proper error handling and retries
+- `data_processing.py` - Data analysis and export
+- `integration_test.py` - Automated integration testing
+- `service_integration.py` - Service-to-service patterns
+- `rate_limit_test.py` - Rate limiting behavior
+
+See [python_examples/README.md](python_examples/README.md) for details.
+
+## 🎓 Educational Use Cases
+
+This service is perfect for:
+
+1. **API Training** - Learn REST API concepts and best practices
+2. **Integration Testing** - Generate realistic test data for validation
+3. **Development** - Mock data for frontend/backend development
+4. **CI/CD** - Automated testing and health monitoring
+5. **Data Pipelines** - ETL patterns and data transformation examples
+
 ## 📝 License
 
 This project is provided as-is for educational and production use.
@@ -494,7 +560,9 @@ This is a standalone service. Modify as needed for your requirements.
 
 ## 📞 Support
 
-For issues or questions, refer to the SQLite and .NET 8 documentation:
+For issues or questions, refer to the documentation:
+- [StatusService Documentation](StatusService/README.md)
+- [Python Examples](python_examples/README.md)
 - [.NET 8 Documentation](https://learn.microsoft.com/en-us/dotnet/)
 - [SQLite Documentation](https://www.sqlite.org/docs.html)
 - [Microsoft.Data.Sqlite](https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/)
