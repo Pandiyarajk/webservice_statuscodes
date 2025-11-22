@@ -23,6 +23,34 @@ app.UseMiddleware<BlockMiddleware>();
 app.UseMiddleware<RateLimitMiddleware>();
 app.UseMiddleware<LoggingMiddleware>();
 
+// Root endpoint
+app.MapGet("/", () =>
+{
+    return Results.Ok(new
+    {
+        service = "StatusService",
+        version = "1.0",
+        description = "HTTP Status Code Testing Service",
+        endpoints = new
+        {
+            health = "/health",
+            status = "/status/{code}?message=&delay=&size=",
+            logs = "/logs?limit=100",
+            blocklist = "/blocklist",
+            unblock = "/unblock?ip=",
+            api = new
+            {
+                users = "/api/users?count=10&id=",
+                products = "/api/products?count=10&id=",
+                orders = "/api/orders?count=10&id=&userId=",
+                random = "/api/random?type=user&count=1",
+                batch = "/api/batch?users=5&products=5&orders=5"
+            }
+        },
+        timestamp = DateTime.UtcNow.ToString("o")
+    });
+});
+
 // Health endpoint
 app.MapGet("/health", () =>
 {

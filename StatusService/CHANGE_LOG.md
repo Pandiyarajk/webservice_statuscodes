@@ -136,7 +136,7 @@ All educational endpoints return standardized responses:
   
 - **Configuration**
   - `appsettings.json` with Kestrel configuration
-  - Default port: 5000
+  - Default port: 8200
   - Configurable logging levels
   
 - **Documentation**
