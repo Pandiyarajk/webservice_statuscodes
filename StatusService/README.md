@@ -77,6 +77,165 @@ dotnet run
 
 ## 📡 API Endpoints
 
+### Educational API Endpoints (New!)
+
+The service now includes educational endpoints that generate realistic test data for learning API integration and testing.
+
+#### 1. Get Users
+
+**Endpoint:** `GET /api/users`
+
+**Parameters:**
+- `count` (optional): Number of users to generate (1-100, default: 10)
+- `id` (optional): Generate specific user with this ID
+
+**Examples:**
+
+```bash
+# Get 10 random users
+curl http://localhost:5000/api/users
+
+# Get 25 users
+curl "http://localhost:5000/api/users?count=25"
+
+# Get specific user
+curl "http://localhost:5000/api/users?id=12345"
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "count": 2,
+  "data": [
+    {
+      "id": 12345,
+      "username": "john.smith42",
+      "email": "john.smith@example.com",
+      "firstName": "John",
+      "lastName": "Smith",
+      "age": 32,
+      "city": "New York",
+      "phone": "+1-555-123-4567",
+      "registeredAt": "2024-05-15T10:30:00Z",
+      "isActive": true,
+      "credits": 250.50
+    }
+  ],
+  "timestamp": "2025-11-22T12:34:56.789Z"
+}
+```
+
+#### 2. Get Products
+
+**Endpoint:** `GET /api/products`
+
+**Parameters:**
+- `count` (optional): Number of products to generate (1-100, default: 10)
+- `id` (optional): Generate specific product with this ID
+
+**Examples:**
+
+```bash
+# Get 10 random products
+curl http://localhost:5000/api/products
+
+# Get 15 products
+curl "http://localhost:5000/api/products?count=15"
+```
+
+**Sample Product:**
+```json
+{
+  "id": 54321,
+  "name": "Premium Widget",
+  "category": "Electronics",
+  "price": 149.99,
+  "description": "High-quality premium widget...",
+  "inStock": 45,
+  "rating": 4.5,
+  "reviews": 128,
+  "sku": "ELE-5432",
+  "weight": 2.5,
+  "createdAt": "2023-08-20T15:45:00Z"
+}
+```
+
+#### 3. Get Orders
+
+**Endpoint:** `GET /api/orders`
+
+**Parameters:**
+- `count` (optional): Number of orders to generate (1-100, default: 10)
+- `id` (optional): Generate specific order with this ID
+- `userId` (optional): Generate order for specific user
+
+**Examples:**
+
+```bash
+# Get 10 random orders
+curl http://localhost:5000/api/orders
+
+# Get order for specific user
+curl "http://localhost:5000/api/orders?userId=12345&count=5"
+```
+
+#### 4. Get Random Data
+
+**Endpoint:** `GET /api/random`
+
+**Parameters:**
+- `type` (required): Type of data (user, product, order)
+- `count` (optional): Number of items (1-100, default: 1)
+
+**Examples:**
+
+```bash
+# Get 5 random users
+curl "http://localhost:5000/api/random?type=user&count=5"
+
+# Get 3 random products
+curl "http://localhost:5000/api/random?type=product&count=3"
+```
+
+#### 5. Batch Request
+
+**Endpoint:** `GET /api/batch`
+
+**Parameters:**
+- `users` (optional): Number of users (0-50, default: 5)
+- `products` (optional): Number of products (0-50, default: 5)
+- `orders` (optional): Number of orders (0-50, default: 5)
+
+**Examples:**
+
+```bash
+# Get mixed data
+curl "http://localhost:5000/api/batch?users=10&products=10&orders=5"
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "users": [...],
+    "products": [...],
+    "orders": [...]
+  },
+  "counts": {
+    "users": 10,
+    "products": 10,
+    "orders": 5
+  },
+  "timestamp": "2025-11-22T12:34:56.789Z"
+}
+```
+
+---
+
+### Status Testing Endpoints
+
 ### 1. Status Testing Endpoint
 
 Test any HTTP status code with optional parameters.
@@ -484,6 +643,72 @@ taskkill /PID <PID> /F
 
 **Solution:** Ensure the application has write permissions to the `Data/` and `data/` directories.
 
+## 🐍 Python Examples
+
+The `python_examples/` directory contains comprehensive Python scripts for educational purposes and API integration training.
+
+### Available Scripts
+
+| Script | Purpose | Learning Focus |
+|--------|---------|----------------|
+| `basic_request.py` | Introduction to API requests | REST basics, JSON handling |
+| `error_handling.py` | Proper error handling | Retries, exceptions, robustness |
+| `data_processing.py` | Data analysis and export | Statistics, transformation, I/O |
+| `integration_test.py` | Automated testing | Testing strategies, assertions |
+| `service_integration.py` | Service-to-service integration | Pipelines, ETL, data sync |
+| `rate_limit_test.py` | Rate limiting behavior | Throttling, backoff strategies |
+
+### Quick Start with Python
+
+1. **Install dependencies:**
+   ```bash
+   pip install -r python_examples/requirements.txt
+   ```
+
+2. **Run an example:**
+   ```bash
+   python python_examples/basic_request.py
+   ```
+
+3. **Run integration tests:**
+   ```bash
+   python python_examples/integration_test.py
+   ```
+
+### Use Cases
+
+- **API Learning**: Understand REST API concepts and best practices
+- **Integration Testing**: Test your services against generated data
+- **Training**: Educational tool for teaching API integration
+- **Development**: Generate test data for development
+- **ETL Pipelines**: Example patterns for data transformation
+
+See [python_examples/README.md](python_examples/README.md) for detailed documentation.
+
+## 🎓 Educational Use Cases
+
+This service is designed for:
+
+1. **API Integration Training**
+   - Learn how to consume REST APIs
+   - Practice error handling and retry logic
+   - Understand rate limiting
+
+2. **Testing & QA**
+   - Generate realistic test data
+   - Test service integrations
+   - Validate data pipelines
+
+3. **Development & Prototyping**
+   - Mock data for frontend development
+   - Test API client libraries
+   - Validate integration scenarios
+
+4. **CI/CD & Automation**
+   - Automated integration testing
+   - Performance testing
+   - Health check monitoring
+
 ## 📝 License
 
 This project is provided as-is for educational and production use.
@@ -498,3 +723,4 @@ For issues or questions, refer to the SQLite and .NET 8 documentation:
 - [.NET 8 Documentation](https://learn.microsoft.com/en-us/dotnet/)
 - [SQLite Documentation](https://www.sqlite.org/docs.html)
 - [Microsoft.Data.Sqlite](https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/)
+- [Requests Library](https://requests.readthedocs.io/) (for Python examples)
